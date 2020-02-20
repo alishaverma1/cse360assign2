@@ -47,43 +47,50 @@ public class SimpleList {
 	}
 	
 	/**
-	 * Adds parameter to the beginning of the list. If list length is already 10, 
-	 * then removes the elements at the end of the list which exceed the length of ten.
+	 * Adds parameter to the beginning of the list. If list is already full, 
+	 * then increases the size of the list by 50%.
 	 * 
 	 * @param numToAdd integer to be added to the beginning of list
 	 */
 	public void add ( int numToAdd ) {
 		
-		//creates a newList with 11 elements to store an additional element if needed
-		int[] newList = new int[ list.length + 1 ]; 
+		int biggerListSize = list.length + list.length/2;
+		
+		//creates newList to perform addition on with size increased by fifty percent
+		int[] newList = new int[biggerListSize];
 		
 		newList[0] = numToAdd;
-			
-		//moves other elements up by one
+		
 		for ( int listIndex = 0; listIndex < count; listIndex++ ) {
 			
 			newList[listIndex + 1] = list[listIndex];
 		}
 		
-		//if there are less than 10 elements in list, increment the count
-		if ( count < 10 ) {
+		if ( count >= list.length ) {
 			
-			count++;
+			//if list is full, then copy entire newList
+			list = Arrays.copyOf(newList, biggerListSize);
+			
+		} else {
+			
+			//else only copy the integers from newList which already fit into list
+			list = Arrays.copyOf(newList, list.length);
+			
 		}
 		
-		//copies first ten elements of the newList into list
-		list = Arrays.copyOf(newList, list.length);
+		count++;
 	}
 	
 	/**
 	 * Removes the parameter from the list if it is found in the list. Moves the other integers 
-	 * in the list down if needed and adjusts the count as needed.
+	 * in the list down if needed and adjusts the count as needed as welll as the size of the list
+	 * if more than 25% of the list is empty.
 	 * 
 	 * @param numToRemove integer to be removed from the list
 	 */
 	public void remove( int numToRemove ) {
 		
-		//if there are elements in the list 
+		//if there are elements in the list
 		if ( count != 0 ) {
 			
 			boolean elementFound = false;
@@ -91,8 +98,7 @@ public class SimpleList {
 			
 			for ( int listIndex = 0; listIndex < count; listIndex++ ) {
 				
-				if ( elementFound ) { 
-					
+				if ( elementFound ) {
 					//do nothing if the element to remove has already been found
 				} else {
 					
@@ -104,7 +110,7 @@ public class SimpleList {
 				}
 			}
 			
-			//if the numToRemove was in the list, remove it from the list
+			//if the numToRemove was in the list, then remove it from the list
 			if ( elementFound ) {
 				
 				for ( int listIndex = index+1; listIndex < count; listIndex++ ) {
@@ -113,6 +119,22 @@ public class SimpleList {
 				}
 				
 				count--;
+				
+				int numOfEmptyPlaces = 0;
+				
+				for ( int listIndex = 0; listIndex < list.length; listIndex++ ) {
+					
+					if ( list[listIndex] == 0 ) {
+						
+						numOfEmptyPlaces++;
+					}
+				}
+				
+				//if the number of empty places is greater than 25 percent of the list, decrease list size
+				if ( numOfEmptyPlaces >= list.length/4 ) {
+					
+					list = Arrays.copyOf(list, list.length-1);
+				}
 			}
 		}
 	}
@@ -173,5 +195,46 @@ public class SimpleList {
 		}
 		
 		return indexOfParam;
+	}
+	
+	/**
+	 * Appends the parameter to the end of the list.
+	 * If the list is already full, increase the size of the list by 50 percent.
+	 * 
+	 * @param numToAppend integer to add to end of the list
+	 */
+	public void append ( int numToAppend ) {
+		
+		int biggerListSize = list.length + list.length/2;
+		
+		if ( count >= list.length ) {
+			
+			//if the list is full, increases the size of the list by fifty percent
+			list = Arrays.copyOf(list, biggerListSize);  
+		}
+		
+		list[count] = numToAppend;
+		
+		count++;
+	}
+	
+	/**
+	 * Returns the first element in the list.
+	 * 
+	 * @return
+	 */
+	public int first() {
+		
+		return list[0];
+	}
+	
+	/**
+	 * Returns the current number of possible locations in a list.
+	 * 
+	 * @return the size of the list
+	 */
+	public int size() {
+		
+		return list.length;
 	}
 }
