@@ -3,14 +3,15 @@ package cse360assign2;
 /**
  * Author: Alisha Verma
  * Class ID: 316
- * Assignment: 1
+ * Assignment: 2
  * Description: This file contains the definitions of the methods and variables
  *            for a class to create and adjust a simple list. The class includes
  *            two private variables to define an int array and an int variable count 
  *            to keep track of the number of elements in the array which have been filled.
- *            This class also includes public methods for adding an element to the array, removing 
- *            an element from the array, returning the number of elements in the array, printing the array
- *            to a string, and searching the array for a specific element.
+ *            This class also includes public methods for adding an element to the array and increasing the
+ *            array size, removing an element from the array and decreasing the array size, printing the array
+ *            to a string, searching the array for a specific element, append an element to the end of the array,
+ *            return the first element, and returning the size of the array.
  */
 
 import java.util.Arrays;
@@ -19,9 +20,10 @@ import java.util.Arrays;
  * The class includes two private variables to define an int array and an int variable count 
  * to keep track of the number of elements in the array which have been filled.
  * <p>
- * This class also includes public methods for adding an element to the array, removing 
- * an element from the array, returning the number of elements in the array, printing the array
- * to a string, and searching the array for a specific element.
+ * This class also includes public methods for adding an element to the array and increasing the
+ * array size, removing an element from the array and decreasing the array size, printing the array
+ * to a string, searching the array for a specific element, append an element to the end of the array,
+ * return the first element, and returning the size of the array.
  * 
  * @author Alisha Verma
  */
